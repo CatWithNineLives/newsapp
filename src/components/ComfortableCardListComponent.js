@@ -1,24 +1,25 @@
 import React from 'react';
 import {FlatList, SafeAreaView} from 'react-native';
 import ConstantUtils from '../utils/ConstantUtils';
-import CompactCardComponent from './CompactCardComponent';
+import ComfortableCardComponent from './ComfortableCardComponent';
 
-function CompactCardListComponent(props) {
+function ComfortableCardListComponent(props) {
   //console.log(`dataList in cardList ${JSON.stringify(props.dataList)}`);
   return (
     <SafeAreaView>
       <FlatList
-        columnWrapperStyle={{justifyContent: 'space-between'}}
         data={props.dataList}
-        numColumns={2}
+        numColumns={1}
         keyExtractor={(item, index) => item.id}
-        renderItem={dataItem => <CompactCardComponent data={dataItem.item} />}
+        renderItem={dataItem => (
+          <ComfortableCardComponent data={dataItem.item} />
+        )}
         onEndReached={props.onEndReached}
-        onEndReachedThreshold={0.7}
+        onEndReachedThreshold={0.6}
         showDefaultLoadingIndicators={true}
       />
     </SafeAreaView>
   );
 }
 
-export default CompactCardListComponent;
+export default ComfortableCardListComponent;

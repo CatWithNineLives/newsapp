@@ -1,22 +1,28 @@
 import React, {useState} from 'react';
 import {View} from 'react-native';
-import CompactCardComponent from './CompactCardComponent';
-import ComfortableCardComponent from './ComfortableCardComponent';
+import CompactCardListComponent from './CompactCardListComponent';
+import ComfortableCardListComponent from './ComfortableCardListComponent';
 import ConstantUtils from '../utils/ConstantUtils';
 
 function CardListComponent(props) {
   const cardType = props.isSwitchEnabled
-    ? ConstantUtils.cardType.COMFORTABLE
-    : ConstantUtils.cardType.COMPACT;
-  console.log(`CardList ${JSON.stringify(props.dataList)}`);
+    ? ConstantUtils.cardType.COMPACT
+    : ConstantUtils.cardType.COMFORTABLE;
+  //console.log(`CardList ${JSON.stringify(props.dataList)}`);
 
   return (
     <View>
-      {/*cardType === ConstantUtils.cardType.COMFORTABLE && (
-        <ComfortableCardComponent dataList={props.dataList} />
-      )*/}
+      {cardType === ConstantUtils.cardType.COMFORTABLE && (
+        <ComfortableCardListComponent
+          dataList={props.dataList}
+          onEndReached={props.onEndReached}
+        />
+      )}
       {cardType === ConstantUtils.cardType.COMPACT && (
-        <CompactCardComponent dataList={ConstantUtils.data[0]} />
+        <CompactCardListComponent
+          dataList={props.dataList}
+          onEndReached={props.onEndReached}
+        />
       )}
     </View>
   );

@@ -12,19 +12,31 @@ import {getNews} from './src/services/NewsService';
 import ConstantUtils from './src/utils/ConstantUtils';
 
 function App() {
-  const [isSwitchEnabled, setIsSwitchEnabled] = useState(true);
-  const [dataList, setDataList] = useState('');
+  const [isSwitchEnabled, setIsSwitchEnabled] = useState(false);
+  const [dataList, setDataList] = useState([]);
+  const [offset, setOffset] = useState(1);
+  const [error, setError] = useState(null);
+
   function toggleSwitch() {
     setIsSwitchEnabled(previousState => !previousState);
   }
   useEffect(() => {
-    getNews(1, 1);
-  }, []);
+    getNews(ConstantUtils.itemsPerRequest, offset)
+      .then(newDataList => setDataList([...dataList, ...newDataList]))
+      .catch(error => {
+        setError(error);
+      });
+  }, [offset]);
+
+  async function fetchMoreItems() {
+    //console.log(`calling fetchMoreItems`);
+    setOffset(prevOffset => prevOffset + ConstantUtils.itemsPerRequest);
+  }
 
   function getOptionRowView() {
     return (
       <View style={styles.rowBox}>
-        <Text>Compact</Text>
+        <Text>Comfortable</Text>
         <Switch
           trackColor={{false: '#767577', true: '#81b0ff'}}
           thumbColor={isSwitchEnabled ? 'powderblue' : 'red'}
@@ -32,7 +44,7 @@ function App() {
           onValueChange={toggleSwitch}
           value={isSwitchEnabled}
         />
-        <Text>Comfortable</Text>
+        <Text>Compact</Text>
       </View>
     );
   }
@@ -42,7 +54,8 @@ function App() {
       <View style={styles.cardView}>
         <CardListComponent
           isSwitchEnabled={isSwitchEnabled}
-          dataList={ConstantUtils.data}
+          dataList={dataList}
+          onEndReached={fetchMoreItems}
         />
       </View>
     </View>

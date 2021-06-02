@@ -27,6 +27,7 @@ function App() {
     getNews(ConstantUtils.itemsPerRequest, offset)
       .then(newDataList => setDataList([...dataList, ...newDataList]))
       .catch(error => {
+        console.log(`Error ${error}`);
         setIsError(true);
       });
   }, [offset]);
@@ -52,7 +53,7 @@ function App() {
         <Switch
           trackColor={'powderblue'}
           thumbColor={'steelblue'}
-          ios_backgroundColor="aliceblue"
+          ios_backgroundColor={'aliceblue'}
           onValueChange={toggleSwitch}
           value={isCompactTypeVisible}
         />
@@ -78,9 +79,10 @@ function App() {
 }
 
 const styles = StyleSheet.create({
-  cardType:{
-    fontSize:20,
-    fontFamily : 'Optima'
+  cardType: {
+    fontSize: 20,
+    fontFamily: 'Optima',
+    color: 'aliceblue',
   },
   container: {
     flex: 1,
@@ -90,7 +92,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     marginTop: height * 0.2,
-    marginHorizontal : width*0.05,
+    marginHorizontal: width * 0.05,
     justifyContent: 'flex-start',
     alignItems: 'center',
   },
@@ -98,7 +100,7 @@ const styles = StyleSheet.create({
     fontSize: 30,
     fontWeight: 'bold',
     color: 'red',
-    fontFamily : 'Optima'
+    fontFamily: 'Optima',
   },
   rowBox: {
     flex: 1,
@@ -106,15 +108,15 @@ const styles = StyleSheet.create({
     marginTop: height * 0.05,
     justifyContent: 'space-evenly',
     alignItems: 'center',
-    backgroundColor: '#1F7A8C',
+    backgroundColor: '#001B2E',
   },
   viewOption: {
     flex: 1,
-    backgroundColor: '#1F7A8C',
+    backgroundColor: '#001B2E',
     flexDirection: 'row',
   },
   cardView: {
-    backgroundColor: '#001B2E',
+    backgroundColor: '#E0FFFF',
     flex: 7,
   },
 });

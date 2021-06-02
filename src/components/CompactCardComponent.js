@@ -13,8 +13,12 @@ function CompactCardComponent(props) {
   return (
     <View style={styles.cardView}>
       <View style={styles.cardContainer}>
-        <Image style={styles.image} source={{uri: props.data.imageUrl}} />
-        <Text style={styles.createdAt}>{props.data.createdAt}</Text>
+        <View>
+          <Image style={styles.image} source={{uri: props.data.imageUrl}} />
+        </View>
+        <View>
+          <Text style={styles.createdAt}>{props.data.createdAt}</Text>
+        </View>
       </View>
     </View>
   );
@@ -24,23 +28,25 @@ const styles = StyleSheet.create({
     height: height * 0.25,
     width: width * 0.45,
     borderRadius: 15,
-    backgroundColor: '#519E8A',
+    backgroundColor: '#ADD8E6',
     marginVertical: 10,
-    marginHorizontal: width*0.01,
+    marginHorizontal: width * 0.01,
   },
   cardContainer: {
     flex: 1,
     flexDirection: 'column',
-    justifyContent: 'space-around',
+    justifyContent: 'space-evenly',
     alignItems: 'center',
   },
   image: {
-    width: width * 0.40,
+    width: width * 0.4,
     height: height * 0.18,
+    borderRadius: 15,
   },
-  createdAt :{
-    fontFamily : 'Optima'
-  }
+  createdAt: {
+    fontFamily: 'Optima',
+    fontSize: width * 0.03,
+  },
 });
 
 export default CompactCardComponent;

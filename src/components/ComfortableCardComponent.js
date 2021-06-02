@@ -13,21 +13,21 @@ function ComfortableCardComponent(props) {
 
   function getExpandedView() {
     return (
-      <TouchableHighlight onPress={toggleCardView} underlayColor="#003366">
+      <TouchableHighlight onPress={toggleCardView} underlayColor={'#E0FFFF'}>
         <View style={styles.expandedCardView}>
           <View style={styles.cardContainer}>
             <View style={styles.imageContainer}>
               <Image style={styles.image} source={{uri: props.data.imageUrl}} />
             </View>
             <View style={styles.textContainer}>
-              <View style={{marginBottom : height*0.005}}>
-              <Text style={styles.headline}>{props.data.headline}</Text>
+              <View style={{marginBottom: height * 0.005}}>
+                <Text style={styles.headline}>{props.data.headline}</Text>
               </View>
-              <View style={{marginBottom : height*0.005}}>
-              <Text style={styles.summary}>{props.data.summary}</Text>
+              <View style={{marginBottom: height * 0.005}}>
+                <Text style={styles.summary}>{props.data.summary}</Text>
               </View>
-              <View style={{marginBottom : height*0.03}}>
-              <Text style={styles.createdAt}>{props.data.createdAt}</Text>
+              <View style={{marginBottom: height * 0.03}}>
+                <Text style={styles.createdAt}>{props.data.createdAt}</Text>
               </View>
             </View>
           </View>
@@ -40,7 +40,7 @@ function ComfortableCardComponent(props) {
   }
   function getCompressedView() {
     return (
-      <TouchableHighlight onPress={toggleCardView} underlayColor="#003366">
+      <TouchableHighlight onPress={toggleCardView} underlayColor={'#E0FFFF'}>
         <View style={styles.compressedCardView}>
           <View style={styles.cardContainer}>
             <View style={styles.imageContainer}>
@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
     height: height * 0.2,
     width: width * 0.95,
     borderRadius: 15,
-    backgroundColor: '#7EB09B',
+    backgroundColor: '#ADD8E6',
     marginVertical: 10,
     marginHorizontal: 12,
   },
@@ -108,10 +108,10 @@ const styles = StyleSheet.create({
     height: 'auto',
     width: width * 0.95,
     borderRadius: 15,
-    backgroundColor: '#7EB09B',
+    backgroundColor: '#ADD8E6',
     marginVertical: 10,
     marginHorizontal: 12,
-    alignSelf: 'center'
+    alignSelf: 'center',
   },
   cardContainer: {
     flex: 1,

@@ -5,7 +5,7 @@ import ComfortableCardListComponent from './ComfortableCardListComponent';
 import ConstantUtils from '../utils/ConstantUtils';
 
 function CardListComponent(props) {
-  const cardType = props.isSwitchEnabled
+  const cardType = props.isCompactTypeVisible
     ? ConstantUtils.cardType.COMPACT
     : ConstantUtils.cardType.COMFORTABLE;
   //console.log(`CardList ${JSON.stringify(props.dataList)}`);

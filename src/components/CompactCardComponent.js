@@ -14,7 +14,7 @@ function CompactCardComponent(props) {
     <View style={styles.cardView}>
       <View style={styles.cardContainer}>
         <Image style={styles.image} source={{uri: props.data.imageUrl}} />
-        <Text>{props.data.createdAt}</Text>
+        <Text style={styles.createdAt}>{props.data.createdAt}</Text>
       </View>
     </View>
   );
@@ -24,20 +24,23 @@ const styles = StyleSheet.create({
     height: height * 0.25,
     width: width * 0.45,
     borderRadius: 15,
-    backgroundColor: 'pink',
+    backgroundColor: '#519E8A',
     marginVertical: 10,
-    marginHorizontal: 3,
+    marginHorizontal: width*0.01,
   },
   cardContainer: {
     flex: 1,
     flexDirection: 'column',
-    justifyContent: 'center',
+    justifyContent: 'space-around',
     alignItems: 'center',
   },
   image: {
-    width: height * 0.15,
-    height: width * 0.4,
+    width: width * 0.40,
+    height: height * 0.18,
   },
+  createdAt :{
+    fontFamily : 'Optima'
+  }
 });
 
 export default CompactCardComponent;

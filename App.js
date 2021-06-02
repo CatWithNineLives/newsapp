@@ -11,20 +11,23 @@ import CardListComponent from './src/components/CardListComponent';
 import {getNews} from './src/services/NewsService';
 import ConstantUtils from './src/utils/ConstantUtils';
 
+import {Dimensions} from 'react-native';
+const {width, height} = Dimensions.get('window');
+
 function App() {
-  const [isSwitchEnabled, setIsSwitchEnabled] = useState(false);
+  const [isCompactTypeVisible, setIsCompactTypeVisible] = useState(false);
   const [dataList, setDataList] = useState([]);
   const [offset, setOffset] = useState(1);
-  const [error, setError] = useState(null);
+  const [isError, setIsError] = useState(false);
 
   function toggleSwitch() {
-    setIsSwitchEnabled(previousState => !previousState);
+    setIsCompactTypeVisible(previousState => !previousState);
   }
   useEffect(() => {
     getNews(ConstantUtils.itemsPerRequest, offset)
       .then(newDataList => setDataList([...dataList, ...newDataList]))
       .catch(error => {
-        setError(error);
+        setIsError(true);
       });
   }, [offset]);
 
@@ -33,64 +36,86 @@ function App() {
     setOffset(prevOffset => prevOffset + ConstantUtils.itemsPerRequest);
   }
 
-  function getOptionRowView() {
+  function getErrorView() {
+    return (
+      <View style={styles.errorContainer}>
+        <Text style={styles.errorText}>
+          Error encountered while fetching news, please try again later!
+        </Text>
+      </View>
+    );
+  }
+  function getCardTypeToggleViewBox() {
     return (
       <View style={styles.rowBox}>
-        <Text>Comfortable</Text>
+        <Text style={styles.cardType}>Comfortable</Text>
         <Switch
-          trackColor={{false: '#767577', true: '#81b0ff'}}
-          thumbColor={isSwitchEnabled ? 'powderblue' : 'red'}
-          ios_backgroundColor="#3e3e3e"
+          trackColor={'powderblue'}
+          thumbColor={'steelblue'}
+          ios_backgroundColor="aliceblue"
           onValueChange={toggleSwitch}
-          value={isSwitchEnabled}
+          value={isCompactTypeVisible}
         />
-        <Text>Compact</Text>
+        <Text style={styles.cardType}>Compact</Text>
       </View>
     );
   }
   return (
     <View style={styles.container}>
-      <View style={styles.viewOption}>{getOptionRowView()}</View>
+      <View style={styles.viewOption}>{getCardTypeToggleViewBox()}</View>
       <View style={styles.cardView}>
-        <CardListComponent
-          isSwitchEnabled={isSwitchEnabled}
-          dataList={dataList}
-          onEndReached={fetchMoreItems}
-        />
+        {!isError && (
+          <CardListComponent
+            isCompactTypeVisible={isCompactTypeVisible}
+            dataList={dataList}
+            onEndReached={fetchMoreItems}
+          />
+        )}
+        {isError && getErrorView()}
       </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
+  cardType:{
+    fontSize:20,
+    fontFamily : 'Optima'
+  },
   container: {
-    borderColor: 'red',
-    borderWidth: 5,
     flex: 1,
     flexDirection: 'column',
+  },
+  errorContainer: {
+    flex: 1,
+    flexDirection: 'column',
+    marginTop: height * 0.2,
+    marginHorizontal : width*0.05,
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+  },
+  errorText: {
+    fontSize: 30,
+    fontWeight: 'bold',
+    color: 'red',
+    fontFamily : 'Optima'
   },
   rowBox: {
     flex: 1,
     flexDirection: 'row',
+    marginTop: height * 0.05,
     justifyContent: 'space-evenly',
     alignItems: 'center',
-    backgroundColor: 'blue',
+    backgroundColor: '#1F7A8C',
   },
   viewOption: {
-    borderColor: 'blue',
-    borderWidth: 5,
     flex: 1,
-    backgroundColor: 'darkorange',
+    backgroundColor: '#1F7A8C',
     flexDirection: 'row',
   },
   cardView: {
-    borderColor: 'black',
-    backgroundColor: 'green',
-    borderWidth: 5,
+    backgroundColor: '#001B2E',
     flex: 7,
-    //flexDirection: 'row',
-    //justifyContent: 'center',
-    //alignItems: 'center',
   },
 });
 

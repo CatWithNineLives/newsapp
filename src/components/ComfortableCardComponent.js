@@ -4,43 +4,59 @@
  */
 
 import React, {useState} from 'react';
-import {View, Text, Image, StyleSheet} from 'react-native';
+import {View, Text, Image, StyleSheet, TouchableHighlight} from 'react-native';
 import {Dimensions} from 'react-native';
 const {width, height} = Dimensions.get('window');
 
 function ComfortableCardComponent(props) {
-  const [isViewExpanded, setIsViewExpanded] = useState(true);
+  const [isViewExpanded, setIsViewExpanded] = useState(false);
 
   function getExpandedView() {
     return (
-      <View style={styles.expandedCardView}>
-        <View style={styles.cardContainer}>
-          <View style={styles.imageContainer}>
-            <Image style={styles.image} source={{uri: props.data.imageUrl}} />
-          </View>
-          <View style={styles.textContainer}>
-            <Text style={styles.headline}>{props.data.headline}</Text>
-            <Text style={styles.summary}>{props.data.summary}</Text>
-            <Text style={styles.createdAt}>{props.data.createdAt}</Text>
+      <TouchableHighlight onPress={toggleCardView} underlayColor="#003366">
+        <View style={styles.expandedCardView}>
+          <View style={styles.cardContainer}>
+            <View style={styles.imageContainer}>
+              <Image style={styles.image} source={{uri: props.data.imageUrl}} />
+            </View>
+            <View style={styles.textContainer}>
+              <View style={{marginBottom : height*0.005}}>
+              <Text style={styles.headline}>{props.data.headline}</Text>
+              </View>
+              <View style={{marginBottom : height*0.005}}>
+              <Text style={styles.summary}>{props.data.summary}</Text>
+              </View>
+              <View style={{marginBottom : height*0.03}}>
+              <Text style={styles.createdAt}>{props.data.createdAt}</Text>
+              </View>
+            </View>
           </View>
         </View>
-      </View>
+      </TouchableHighlight>
     );
   }
-
+  function toggleCardView() {
+    setIsViewExpanded(prevState => !prevState);
+  }
   function getCompressedView() {
     return (
-      <View style={styles.compressedCardView}>
-        <View style={styles.cardContainer}>
-          <View style={styles.imageContainer}>
-            <Image style={styles.image} source={{uri: props.data.imageUrl}} />
-          </View>
-          <View style={styles.textContainer}>
-            <Text style={styles.headline}>{props.data.headline}</Text>
-            <Text style={styles.summary}>{props.data.summary}</Text>
+      <TouchableHighlight onPress={toggleCardView} underlayColor="#003366">
+        <View style={styles.compressedCardView}>
+          <View style={styles.cardContainer}>
+            <View style={styles.imageContainer}>
+              <Image style={styles.image} source={{uri: props.data.imageUrl}} />
+            </View>
+            <View style={styles.textContainer}>
+              <Text numberOfLines={2} style={styles.headline}>
+                {props.data.headline}
+              </Text>
+              <Text numberOfLines={3} style={styles.summary}>
+                {props.data.summary}
+              </Text>
+            </View>
           </View>
         </View>
-      </View>
+      </TouchableHighlight>
     );
   }
   return (
@@ -53,13 +69,18 @@ function ComfortableCardComponent(props) {
 const styles = StyleSheet.create({
   imageContainer: {
     flex: 1,
-    marginHorizontal: 10,
+    marginLeft: width * 0.03,
+    marginTop: height * 0.03,
+    flexDirection: 'column',
+    justifyContent: 'flex-start',
   },
   textContainer: {
-    flex: 2,
+    flex: 3,
+    marginTop: height * 0.03,
+    marginLeft: width * 0.05,
     flexDirection: 'column',
-    //justifyContent: 'center',
-    //alignItems: 'center',
+    justifyContent: 'flex-start',
+    marginRight: 5,
   },
   headline: {
     fontSize: 20,
@@ -76,26 +97,27 @@ const styles = StyleSheet.create({
     fontFamily: 'Optima',
   },
   compressedCardView: {
-    height: height * 0.25,
-    width: width * 0.9,
+    height: height * 0.2,
+    width: width * 0.95,
     borderRadius: 15,
-    backgroundColor: 'pink',
+    backgroundColor: '#7EB09B',
     marginVertical: 10,
     marginHorizontal: 12,
   },
   expandedCardView: {
-    height: height * 0.45,
-    width: width * 0.9,
+    height: 'auto',
+    width: width * 0.95,
     borderRadius: 15,
-    backgroundColor: 'pink',
+    backgroundColor: '#7EB09B',
     marginVertical: 10,
     marginHorizontal: 12,
+    alignSelf: 'center'
   },
   cardContainer: {
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-around',
-    alignItems: 'center',
+    //alignItems: 'center',
   },
   image: {
     width: height * 0.1,

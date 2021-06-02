@@ -8,7 +8,7 @@ function CompactCardListComponent(props) {
   return (
     <SafeAreaView>
       <FlatList
-        columnWrapperStyle={{justifyContent: 'space-between'}}
+        columnWrapperStyle={{justifyContent: 'space-around'}}
         data={props.dataList}
         numColumns={2}
         keyExtractor={(item, index) => item.id}

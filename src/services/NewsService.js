@@ -17,7 +17,7 @@ function getProcessedData(dataList) {
   for (let data of dataList) {
     var processedDataItem = {};
     //The _id is not necessarily unique so we shall generate random ID
-    processedDataItem.id = `${data._id}${Math.floor(Math.random() * 5)}`;
+    processedDataItem.id = `${data._id}${Math.floor(Math.random() * 1000)}`;
     //console.log(`processedDataItem.id ${processedDataItem.id}`);
     processedDataItem.headline = data.headline;
     processedDataItem.summary = data.summary;

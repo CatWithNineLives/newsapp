@@ -47,12 +47,16 @@ function ComfortableCardComponent(props) {
               <Image style={styles.image} source={{uri: props.data.imageUrl}} />
             </View>
             <View style={styles.textContainer}>
-              <Text numberOfLines={2} style={styles.headline}>
-                {props.data.headline}
-              </Text>
-              <Text numberOfLines={3} style={styles.summary}>
-                {props.data.summary}
-              </Text>
+              <View style={{marginBottom: height * 0.005}}>
+                <Text numberOfLines={2} style={styles.headline}>
+                  {props.data.headline}
+                </Text>
+              </View>
+              <View style={{marginBottom: height * 0.03}}>
+                <Text numberOfLines={3} style={styles.summary}>
+                  {props.data.summary}
+                </Text>
+              </View>
             </View>
           </View>
         </View>
@@ -83,41 +87,40 @@ const styles = StyleSheet.create({
     marginRight: 5,
   },
   headline: {
-    fontSize: 20,
+    fontSize: width * 0.05,
     fontWeight: 'bold',
     fontFamily: 'Optima',
   },
   summary: {
-    fontSize: 15,
+    fontSize: width * 0.04,
     fontFamily: 'Optima',
   },
   createdAt: {
-    fontSize: 15,
+    fontSize: width * 0.03,
     fontWeight: 'bold',
     fontFamily: 'Optima',
   },
   compressedCardView: {
-    height: height * 0.2,
+    height: 'auto',
     width: width * 0.95,
     borderRadius: 15,
     backgroundColor: '#ADD8E6',
-    marginVertical: 10,
-    marginHorizontal: 12,
+    marginVertical: height * 0.008,
+    marginHorizontal: width * 0.025,
   },
   expandedCardView: {
     height: 'auto',
     width: width * 0.95,
     borderRadius: 15,
     backgroundColor: '#ADD8E6',
-    marginVertical: 10,
-    marginHorizontal: 12,
+    marginVertical: height * 0.008,
+    marginHorizontal: width * 0.025,
     alignSelf: 'center',
   },
   cardContainer: {
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-around',
-    //alignItems: 'center',
   },
   image: {
     width: height * 0.1,
